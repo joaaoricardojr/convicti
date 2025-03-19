@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import AuthService from '@/services/auth.service.js'; // Importa o serviço
+import AuthService from '@/services/auth.service.js';
 
 export default {
   data() {

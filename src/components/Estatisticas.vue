@@ -20,8 +20,6 @@
 export default {
   data() {
     return {
-      // Aqui você buscaria a permissão do usuário da API
-      // Simulando um usuário comum
       permissao: 'usuario',
     };
   },
