@@ -4,23 +4,26 @@ const API_URL = '/oauth/token';
 const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
 const CLIENT_SECRET = import.meta.env.VITE_CLIENT_SECRET;
 
+let accessToken = localStorage.getItem('access_token');
+let refreshToken = localStorage.getItem('refresh_token');
+
 const handleLoginError = (error) => {
   if (error.response) {
-    console.error('Erro de login:', error.response.status, error.response.data);
-    throw {
-      status: error.response.status,
-      message: `Erro ao fazer login. Código ${error.response.status}: ${error.response.data.message}`,
-    };
+    console.error('Erro de login:', error.response.data);
+    throw { message: error.response.data.message || 'Erro de login. Tente novamente.' };
   } else if (error.request) {
-    console.error('Erro de login: Nenhuma resposta do servidor');
-    throw { message: 'Erro ao fazer login. Nenhuma resposta recebida do servidor.' };
+    console.error('Erro de login:', error.request);
+    throw { message: 'Erro de rede. Verifique sua conexão.' };
   } else {
     console.error('Erro de login:', error.message);
-    throw { message: `Erro ao fazer login. Erro na requisição: ${error.message}` };
+    throw { message: error.message || 'Erro desconhecido. Tente novamente.' };
   }
 };
 
 const AuthService = {
+  accessToken,
+  refreshToken,
+
   async login(username, password) {
     try {
       const response = await axios.post(API_URL, {
@@ -32,8 +35,10 @@ const AuthService = {
       });
 
       if (response.status === 200) {
-        localStorage.setItem('access_token', response.data.access_token);
-        localStorage.setItem('refresh_token', response.data.refresh_token);
+        this.accessToken = response.data.access_token;
+        this.refreshToken = response.data.refresh_token;
+        localStorage.setItem('access_token', this.accessToken);
+        localStorage.setItem('refresh_token', this.refreshToken);
         return response.data;
       }
 
@@ -45,16 +50,24 @@ const AuthService = {
   },
 
   logout() {
+    this.accessToken = null;
+    this.refreshToken = null;
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
   },
 
   getAccessToken() {
-    return localStorage.getItem('access_token');
+    return this.accessToken;
   },
+
   getRefreshToken() {
-    return localStorage.getItem('refresh_token');
+    return this.refreshToken;
   },
+
+  isLoggedIn() {
+    return !!this.accessToken;
+  },
+
   async refreshToken() {
     try {
       const refreshToken = this.getRefreshToken();
@@ -70,15 +83,17 @@ const AuthService = {
       });
 
       if (response.status === 200) {
-        localStorage.setItem('access_token', response.data.access_token);
-        localStorage.setItem('refresh_token', response.data.refresh_token);
+        this.accessToken = response.data.access_token;
+        this.refreshToken = response.data.refresh_token;
+        localStorage.setItem('access_token', this.accessToken);
+        localStorage.setItem('refresh_token', this.refreshToken);
         return response.data;
       }
       handleLoginError({ response });
     } catch (error) {
       handleLoginError(error);
     }
-  }
+  },
 };
 
 export default AuthService;
