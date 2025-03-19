@@ -10,14 +10,14 @@
   </template>
   
   <script>
-  import Estatisticas from '../../components/Estatisticas/Estatisticas.vue';
+  // import Estatisticas from '../../components/Estatisticas/Estatisticas.vue';
 
   
-  export default {
-    components: {
-      Estatisticas,
-    },
-  };
+  // export default {
+  //   components: {
+  //     Estatisticas,
+  //   },
+  // };
   </script>
   
   <style scoped>
