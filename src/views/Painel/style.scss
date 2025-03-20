@@ -1,0 +1,93 @@
+@import '@/assets/scss/main';
+
+.painel-body {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 250px;
+    height: 100%;
+    padding: 32px 0 32.42px 0;
+    border: 1px solid #ccc;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .logo-image {
+        position: fixed;
+        width: 84.62px;
+        height: 54.58px;
+        top: 45px;
+        left: 80px;
+    }
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    padding: 32px 0 32px 0;
+
+    dl {
+        display: contents;
+    }
+
+    .menu-title {
+        position: fixed;
+        font-size: 14px;
+        font-weight: 550;
+        letter-spacing: 0.2em;
+        top: 132px;
+    }
+
+    .menu-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu-item {
+        width: 198px;
+        height: 38px;
+        padding: 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        // @TODO: alinhar os elementos = figma
+        // &:first-child {
+        //     background-color: red;
+        //     font-weight: bold;
+        // }
+        // transition: background-color 0.3s;
+    }
+    
+    .menu-item.active,
+    .menu-item:hover {
+        background-color: #DEE6F8;
+        span {
+            background-color: #DEE6F8;
+        }
+    }
+    
+    .menu-item i {
+        margin-right: 10px;
+        width: 20px;
+        text-align: center;
+    }
+    
+    .menu-item span {
+        font-size: 14px;
+        color: #333;
+    }
+  }
