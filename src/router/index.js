@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import LoginView from '../views/LoginView.vue';
-import DashboardView from '../views/Dashboard/DashboardView.vue';
-import ConfiguracoesView from '../views/Dashboard/ConfiguracoesView.vue';
+import DashboardView from '../views/Painel/DashboardView.vue';
+import ConfiguracoesView from '../views/Painel/ConfiguracoesView.vue';
 import AuthService from '../services/auth.service';
 
 const router = createRouter({
@@ -9,13 +9,8 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      beforeEnter: (to, from, next) => {
-        if (AuthService.isLoggedIn()) {
-          next('/dashboard');
-        } else {
-          next('/login');
-        }
-      },
+      name: '',
+      component: LoginView,
     },
     {
       path: '/login',
