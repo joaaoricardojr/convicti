@@ -10,6 +10,13 @@ let refreshToken = localStorage.getItem('refresh_token');
 const handleLoginError = (error) => {
   if (error.response) {
     console.error('Erro de login:', error.response.data);
+
+    if (error.response.status === 400 || error.response.status === 401) {
+      if (error.response.data.error === 'invalid_grant') {
+        throw { message: 'E-mail ou senha incorretos.' };
+      }
+    }
+
     throw { message: error.response.data.message || 'Erro de login. Tente novamente.' };
   } else if (error.request) {
     console.error('Erro de login:', error.request);
