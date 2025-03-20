@@ -4,28 +4,20 @@
     display: flex;
     justify-content: space-between;
     height: 100vh;
-    /* height: 100%; */
     width: 100%;
-    // position: relative;
-    /* background-color: #F8F8F8; */
   }
   
   .login-section {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    // align-items: center;
     position: fixed;
     width: 290px;
     height: 220px;
-    // border: solid 1px black;
     margin: 306px 172px 306px 131px;
   }
   
   .logo {
-    /* font-size: 2rem; */
-    /* font-weight: bold; */
-    /* margin-bottom: 1rem; */
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -87,8 +79,6 @@
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    // font-size: 12px;
-    // font-weight: 400;
     text-align: center;
     .login-span {
         font-size: 12px;
@@ -98,7 +88,6 @@
     }
   }
 
-  // @TODO - Alinhar ellipses e dashboard
   .ellipse1 {
     width: 713px;
     height: 713px;
@@ -122,22 +111,12 @@
   }
   
   .dashboard {
-    // width: 755px;
-    // height: 755px;
     position: fixed;
-    // margin: auto 0px auto auto;
     right: 0;
-    // top: 82px;
-    // border: 1px solid red;
-    // width: 1000px 0 1000px 1000px;
-    // border-radius: 100% 100% / 100% 100%;
-    // padding: 45px 0 15px 15px;
     z-index: 1;
   }
   
   .dashboard-image {
-    // width: 100%;
-    // height: 100%;
     position: fixed;
     right: 0;
     top: 74px
@@ -147,36 +126,20 @@
     .ellipse1 {
       width: 610px;
       height: 645px;
-      // border: 1px solid $second-color-logo;
-      // border-radius: 100% 100% / 100% 100%;
-      // z-index: 0;
-      // position: fixed;
       right: 0;
-      top: 44px;
+      top: 68px;
     }
     .ellipse2 {
       width: 730px;
       height: 740px;
-      // border: 1px solid $second-color-logo;
-      // border-radius: 100% 100% / 100% 100%;
-      // z-index: 0;
-      // position: fixed;
       right: -60px;
-      top: -5px;
-      // opacity: 50%;
+      top: 20px;
     }
-    
-    // .dashboard {
-    //   position: fixed;
-    //   right: 0;
-    //   z-index: 1;
-    // }
     
     .dashboard-image {
       width: 592px;
       height: 544px;
-      // position: fixed;
-      // right: 0;
+      top: 140px;
     }
   }
 
@@ -184,37 +147,20 @@
     .ellipse1 {
       width: 550px;
       height: 550px;
-      // border: 1px solid $second-color-logo;
-      // border-radius: 100% 100% / 100% 100%;
-      // z-index: 0;
-      // position: fixed;
       right: -46px;
-      top: 75px;
+      top: 125px;
     }
     .ellipse2 {
       width: 640px;
       height: 640px;
-      // border: 1px solid $second-color-logo;
-      // border-radius: 100% 100% / 100% 100%;
-      // z-index: 0;
-      // position: fixed;
       right: -90px;
-      top: 30px;
-      // opacity: 50%;
+      top: 80px;
     }
-    
-    // .dashboard {
-    //   position: fixed;
-    //   right: 0;
-    //   z-index: 1;
-    // }
     
     .dashboard-image {
       width: 492px;
       height: 444px;
-      // position: fixed;
-      // right: 0;
-      top: 134px
+      top: 194px
     }
   }
 
@@ -222,37 +168,19 @@
     .ellipse1 {
       width: 502px;
       height: 502px;
-      // border: 1px solid $second-color-logo;
-      // border-radius: 100% 100% / 100% 100%;
-      // z-index: 0;
-      // position: fixed;
       right: -36px;
-      top: 100px;
+      top: 150px;
     }
     .ellipse2 {
       width: 605px;
       height: 605px;
-      // border: 1px solid $second-color-logo;
-      // border-radius: 100% 100% / 100% 100%;
-      // z-index: 0;
-      // position: fixed;
-      // right: -90px;
-      top: 48px;
-      // opacity: 50%;
+      top: 98px;
     }
-    
-    // .dashboard {
-    //   position: fixed;
-    //   right: 0;
-    //   z-index: 1;
-    // }
     
     .dashboard-image {
       width: 450px;
       height: 402px;
-      // position: fixed;
-      // right: 0;
-      top: 162px
+      top: 212px
     }
   }
 
