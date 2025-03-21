@@ -1,26 +1,29 @@
-import { fileURLToPath, URL } from 'node:url'
+import { fileURLToPath, URL } from 'node:url';
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import vueDevTools from 'vite-plugin-vue-devtools';
+import dotenv from 'dotenv';
 
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import vueDevTools from 'vite-plugin-vue-devtools'
+dotenv.config();
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    vue(),
-    vueDevTools(),
-  ],
+  plugins: [vue(), vueDevTools()],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
   server: {
     proxy: {
       '/oauth': {
-        target: 'http://localhost:8080',
+        target: process.env.BASE_AUTH_URL,
         changeOrigin: true,
+      },
+      '/api/v1': {
+        target: process.env.BASE_URL,
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/v1/, ''),
       },
     },
   },
-})
+});

@@ -1,27 +1,57 @@
 <template>
   <div>
-    <h1>Estatísticas</h1>
-    <div v-if="permissao === 'admin'">
-      <h2>Estatísticas Administrativas</h2>
-      <p>Total de usuários: 100</p>
-      <p>Total de acessos: 1000</p>
-    </div>
-    <div v-else-if="permissao === 'usuario'">
-      <h2>Estatísticas do Usuário</h2>
-      <p>Seus últimos acessos: 10</p>
-    </div>
-    <div v-else>
-      <p>Você não tem permissão para visualizar as estatísticas.</p>
+    <h3>Downloads</h3>
+    <div v-if="loading">Carregando...</div>
+  <div v-else-if="error">Erro: {{ error }}</div>
+  <div v-else>
+    <p>{{ totalItens }}</p>
+    <p>Android: {{ androidCount }}</p>
+    <p>Apple: {{ appleCount }}</p>
     </div>
   </div>
 </template>
 
 <script>
+import { getDados } from '../../services/useApi.service';
+import { contarPlataformas } from '@/utils/contarPlataformas';
+
 export default {
   data() {
     return {
-      permissao: 'usuario',
+      totalItens: 0,
+      androidCount: 0,
+      appleCount: 0,
+      loading: true,
+      error: null,
     };
+  },
+  async mounted() {
+    try {
+      let allItems = [];
+      let page = 1;
+      let response;
+
+      do {
+        response = await getDados(`/downloads?page=${page}`);
+        if (response && response.data && Array.isArray(response.data.data)) {
+          allItems = allItems.concat(response.data.data);
+          page++;
+        } else {
+          console.error("Erro: Resposta da API inválida.");
+          break;
+        }
+      } while (page <= response.data.last_page);
+
+      const { androidCount, appleCount } = contarPlataformas({ data: { data: allItems } });
+      this.totalItens = response.data.total;
+      this.androidCount = androidCount;
+      this.appleCount = appleCount;
+      this.loading = false;
+    } catch (error) {
+      console.error("Erro ao buscar dados:", error);
+      this.error = error.message;
+      this.loading = false;
+    }
   },
 };
 </script>
